@@ -25,3 +25,11 @@ body{
     top: 50%;
     left: 50%;
 }
+
+#flickr-container .pages{
+
+}
+#flickr-container .pages .page{
+    display: inline-block;
+    margin: 5px;
+}

@@ -1,14 +1,12 @@
 var FlickrCollection = Backbone.Collection.extend({
+    model: PhotoModel,
     initialize: function(){
         var self = this;
-        $(function(){
-            $(self.container).html('<div class="loader"><img src="' + self.loaderImage + '"></div>');
-        });
         self.view = new PhotoCollectionView({collection: self});
-        self.fetchPhotos('suicidegirls', 1);
+        self.fetchPhotos('batman', 1);
     },
     container:  "#flickr-container",
-    perPage:     100,
+    perPage:     50,
     api_key:    "8e8b0a8d39a7af07485e7b992084a350",
     base_url: "http://api.flickr.com/services/rest/",
     loaderImage: "images/loader.gif",
@@ -30,13 +28,12 @@ var FlickrCollection = Backbone.Collection.extend({
             url: self.base_url,
             data: data,
             success: function(res){
-                self.reset();
-                self.add(res.photos.photo);
                 self.page = res.photos.page;
                 self.pages = res.photos.pages;
                 self.total = res.photos.total;
                 self.search = search;
-
+                self.reset();
+                self.add(res.photos.photo);
                 if(successCallback) successCallback();
             },
             error: function(jqXHR, textStatus){
@@ -48,8 +45,9 @@ var FlickrCollection = Backbone.Collection.extend({
         var self = this;
         self.view.startLoader();
         function success(){
-            self.view.render();
-            $(self.container).append(self.view.$el);
+            $(self.container).html(self.view.$el);
+            self.trigger('photosReady');
+
         }
         self.getRequestData(search, page, success);
     }
