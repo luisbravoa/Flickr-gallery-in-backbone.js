@@ -27,12 +27,37 @@ var PhotoCollectionView = Backbone.View.extend({
         self.collection.fetchPhotos(self.collection.search, page);
     },
     template:
-        '<h1>Photos</h1>' +
-            '<h2>{{#if search}}Results for {{search}}{{else}}Most recent photos{{/if}}</h2>' +
-            '<p>Page {{page}} of {{pages}}</p>' +
-            '<input id="flickr-search" type="text" value="{{search}}">' +
-            '<button id="flickr-search-button">Search</button>' +
-            '<div class="pages"></div>' +
+        '<div class="row">' +
+            '<div class="col-md-6">' +
+                '<h1>Photos</h1>' +
+            '</div>' +
+        '</div>' +
+        '<div class="row">' +
+            '<div class="col-md-6">' +
+                '<h2>{{#if search}}Results for {{search}}{{else}}Most recent photos{{/if}}</h2>' +
+            '</div>' +
+        '</div>' +
+            '' +
+            '' +
+        '<div class="row">' +
+            '<div class="col-md-3">' +
+                '<form class="form-inline" role="form">' +
+                    '<div class="form-group">' +
+                        '<label class="sr-only" for="flickr-search">Email address</label>' +
+                        '<input class="form-control" id="flickr-search" placeholder="search"  value="{{search}}">' +
+                    '</div>' +
+                '<div class="form-group">' +
+                    '<button type="button" class="btn btn-default" id="flickr-search-button">Search</button>' +
+                '</div>' +
+        '</div>' +
+        '<div class="row">' +
+            '<div class="col-md-4">' +
+                '<div class="pages"></div>' +
+            '</div>' +
+            '<div class="col-md-4">' +
+                '<p class="pages-of-pages">Page {{page}} of {{pages}}</p>' +
+            '</div>' +
+        '</div>' +
             '<div class="flickr-photos"></div>'
     ,
     paginator: function(){
@@ -43,26 +68,26 @@ var PhotoCollectionView = Backbone.View.extend({
         var html = '';
 
         if(currentPage > 1){
-            html += '<a class="page" href="#" rel="' + (currentPage - 1) +'"><< Back</a>';
+            html += '<a class="page  btn btn-default" href="#" rel="' + (currentPage - 1) +'"><< Back</a>';
         }
 
             for(var i=1;i <= totalPages;i++){
                 if(i==currentPage){
                     if(currentPage==1){
-                        html += '<span class="page">'+ currentPage +'</span>';
+                        html += '<span class="page btn btn-default disabled">'+ currentPage +'</span>';
                     }else if(currentPage==totalPages){
-                        html += '<span class="page">' +currentPage + '</span>';
+                        html += '<span class="page  btn btn-default disabled">' +currentPage + '</span>';
                     }else{
-                        html += '<span class="page">'+currentPage+'</span> ';
+                        html += '<span class="page  btn btn-default disabled">'+currentPage+'</span> ';
                     }
                 }else{
                     if(i >= currentPage - 4 && i < currentPage + 4 ){
-                        html += '<a href="#" class="page"  rel="'+i+'">'+i+'</a>';
+                        html += '<a href="#" class="page  btn btn-default"  rel="'+i+'">'+i+'</a>';
                     }
                 }
             }
         if(currentPage < totalPages){
-            html += '<a class="page" href="#" rel="' + (currentPage + 1) +'">Next >></a>';
+            html += '<a class="page  btn btn-default" href="#" rel="' + (currentPage + 1) +'">Next >></a>';
         }
         return html;
     },

@@ -1,6 +1,3 @@
-body{
-    font-family: helvetica, arial, sans-serif;
-}
 #flickr-container{
     border: 1px solid #cccccc;
     min-height: 500px;
@@ -27,9 +24,13 @@ body{
 }
 
 #flickr-container .pages{
-
+    text-align: center;
 }
 #flickr-container .pages .page{
     display: inline-block;
+    margin: 5px;
+
+}
+#flickr-container .pages-of-pages{
     margin: 5px;
 }
