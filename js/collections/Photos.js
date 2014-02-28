@@ -5,6 +5,7 @@ var FlickrCollection = Backbone.Collection.extend({
         self.view = new PhotoCollectionView({collection: self});
         self.fetchPhotos('batman', 1);
     },
+    current: null,
     container:  "#flickr-container",
     perPage:     50,
     api_key:    "8e8b0a8d39a7af07485e7b992084a350",
@@ -50,6 +51,29 @@ var FlickrCollection = Backbone.Collection.extend({
 
         }
         self.getRequestData(search, page, success);
-    }
+    },
+    setCurrent: function(index){
+        // ensure the requested index exists
+        if ( index > -1 && index < this.size() )
+            this.current = this.at(index);
+        else {
+        // handle error...
+            }
+    },
+
+        // unnecessary, but if you want sugar...
+        prev: function() {
+            var self = this;
+            var index = self.current - 1;
+            console.log(index);
+            if(index < 0) return null;
+            return self.at(index);
+        },
+        next: function() {
+            var self = this;
+            var index = self.current + 1;
+            if(index <= self.size) return null;
+            return self.at(index);
+        }
 
 });

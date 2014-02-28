@@ -6,16 +6,17 @@
         <script src="js/lib/jquery-2.1.0.js"></script>
         <script src="js/lib/underscore.js"></script>
         <script src="js/lib/backbone.js"></script>
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
         <script src="js/models/Photo.js"></script>
         <script src="js/collections/Photos.js"></script>
         <script src="js/views/Photos.js"></script>
         <script src="js/views/Photo.js"></script>
+        <script src="js/routers/Photos.js"></script>
         <script>
             var flickr = new FlickrCollection();
+            var flickrRouter = new FlickrRouter();
+            Backbone.history.start();
         </script>
     </head>
     <body>
@@ -25,7 +26,7 @@
         <!-- Large modal -->
         <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <img src="http://farm3.static.flickr.com/2816/12810029245_5fa95c67b2_b.jpg">
                 </div>
