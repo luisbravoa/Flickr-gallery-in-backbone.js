@@ -4,7 +4,6 @@ var PhotoCollectionView = Backbone.View.extend({
     initialize: function(){
         var self = this;
         var collection = self.collection;
-
         $(function(){
             $(collection.container).html('<div class="loader"><img src="' + collection.loaderImage + '"></div>');
         });
@@ -18,13 +17,13 @@ var PhotoCollectionView = Backbone.View.extend({
     search: function(){
         var self = this;
         var text = self.$el.find('#flickr-search').val();
-        self.collection.fetchPhotos(text, 1);
+        self.collection.fetch(text, 1);
     },
     changePage: function(e){
         e.preventDefault();
         var self = this;
         var page = e.target.rel;
-        self.collection.fetchPhotos(self.collection.search, page);
+        self.collection.fetch(self.collection.search, page);
     },
     template:
         '<div class="row">' +
@@ -37,8 +36,6 @@ var PhotoCollectionView = Backbone.View.extend({
                 '<h2>{{#if search}}Results for {{search}}{{else}}Most recent photos{{/if}}</h2>' +
             '</div>' +
         '</div>' +
-            '' +
-            '' +
         '<div class="row">' +
             '<div class="col-md-3">' +
                 '<form class="form-inline" role="form">' +

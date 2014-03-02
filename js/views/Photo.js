@@ -1,7 +1,7 @@
 var PhotoModelView = Backbone.View.extend({
     model: PhotoModel,
     className: 'flickr-photo',
-    template: '<a href="{{url}}"><img class="alpha" src="images/alpha.png"></a>',
+    template: '<a href="{{url}}"><img class="alpha" src="{{src}}"></a>',
     render: function(){
         var self = this;
         self.model.view = this;
@@ -10,7 +10,7 @@ var PhotoModelView = Backbone.View.extend({
         data.src = self.model.src();
         data.url = self.model.url();
         data.url = '#photo/' + data.id;
-        self.$el.css('background-image', 'url("' + data.src + '")')
+//        self.$el.css('background-image', 'url("' + data.src + '")')
         this.$el.html(template(data));
         return this;
     }
