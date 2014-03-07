@@ -1,7 +1,7 @@
 var FlickrRouter = Backbone.Router.extend({
     routes: {
-        "main":                 "main",    // #help
-        "photo/:id":        "photoDetail"  // #search/kiwis
+        "main":                 "main",
+        "photo/:id":        "photoDetail"
     },
     initialize: function(){
         var self = this;

@@ -1,4 +1,12 @@
-flickr
-======
+flickr Gallery (Backbone.js)
+============================
 
-Just a test App
+This a photo gallery that uses the flickr API, it allows you to browse recent photos and also search.
+
+Dependencies
+============
+
+- jQuery
+- Underscore.js
+- Backbone.js
+- Bootstrap
