@@ -1,4 +1,4 @@
-flickr Gallery (Backbone.js)
+flickr gallery (Backbone.js)
 ============================
 
 This a photo gallery that uses the flickr API, it allows you to browse recent photos and also search.
