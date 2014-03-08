@@ -62,11 +62,7 @@ var FlickrRouter = Backbone.Router.extend({
                 '<a href="#photo/{{next.id}}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-right"></span></a>' +
                 '{{/if}}' +
                 '</div>' +
-            '</div>' +
-            '<div class="modal-footer">' +
-                '<p>One fine body&hellip;</p>' +
-            '</div>'
-            ;
+            '</div>';
         var compiledTemplate = Handlebars.compile(template);
         var html = compiledTemplate(templateData);
         $(document).bind('keydown',function(e) {
