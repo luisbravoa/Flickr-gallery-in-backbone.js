@@ -9,15 +9,18 @@ var FlickrRouter = Backbone.Router.extend({
     },
     main: function () {
         var self = this;
+        document.title = 'Demo';
     },
     openModal: function () {
         var self = this;
         if ($('.photoModal').hasClass('in')) return;
+
         $('.photoModal').modal();
         $('.photoModal').on('hide.bs.modal', function (e) {
-            console.log('unbind');
-            $(document).unbind('keydown');
-            self.navigate('main', {trigger: true});
+
+        // unbind keydown
+        $(document).unbind('keydown');
+        self.navigate('main', {trigger: true});
         });
     },
     closeModal: function () {
@@ -29,7 +32,7 @@ var FlickrRouter = Backbone.Router.extend({
         var current = flickrCollection.get(id);
 
         // if current model is not defined close modal
-        // TODO: think about what to do here, either show an error or load the page
+        // TODO: think about what to do here, either show an error or load the photo
         if (!current) {
             self.closeModal();
             return;
@@ -51,23 +54,23 @@ var FlickrRouter = Backbone.Router.extend({
         // TODO: template could go in separate files
         var template = '' +
             '<div class="modal-header">' +
-            '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-            '<h4 class="modal-title">{{current.title}}</h4>' +
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                '<h4 class="modal-title">{{current.title}}</h4>' +
             '</div>' +
             '<div class="modal-body">' +
-            '<div class="prev">' +
-            '{{#if prev}}' +
-            '<a href="#photo/{{prev.id}}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-left"></span></a>' +
-            '{{/if}}' +
-            '</div>' +
-            '<div class="detailedPhoto">' +
-            '<a href="{{current.url}}" target="_blank"><img src="{{current.src}}"></a>' +
-            '</div>' +
-            '<div class="next">' +
-            '{{#if next}}' +
-            '<a href="#photo/{{next.id}}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-right"></span></a>' +
-            '{{/if}}' +
-            '</div>' +
+                '<div class="prev">' +
+                '{{#if prev}}' +
+                    '<a href="#photo/{{prev.id}}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-left"></span></a>' +
+                '{{/if}}' +
+                '</div>' +
+                '<div class="detailedPhoto">' +
+                    '<a href="{{current.url}}" target="_blank"><img src="{{current.src}}"></a>' +
+                '</div>' +
+                '<div class="next">' +
+                    '{{#if next}}' +
+                    '<a href="#photo/{{next.id}}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-right"></span></a>' +
+                    '{{/if}}' +
+                '</div>' +
             '</div>';
         var compiledTemplate = Handlebars.compile(template);
         var html = compiledTemplate(templateData);

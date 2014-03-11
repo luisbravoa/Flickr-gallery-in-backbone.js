@@ -15,7 +15,14 @@ var PhotoCollectionView = Backbone.View.extend({
     },
     events: {
         "click .pages .page": "changePage",
-        "click #flickr-search-button": "search"
+        "click #flickr-search-button": "search",
+        "keypress #flickr-search": "searchWithEnterKey"
+    },
+    searchWithEnterKey: function(e){
+        var self = this;
+        if(e.keyCode == 13){
+            self.search();
+        }
     },
     search: function () {
         var self = this;
@@ -28,35 +35,36 @@ var PhotoCollectionView = Backbone.View.extend({
         var page = e.target.rel;
         self.collection.fetch(self.collection.search, page);
     },
-    // TODO: template could go in separate files
-    template: '<div class="row">' +
-        '<div class="col-md-6">' +
-        '<h1>{{title}}</h1>' +
-        '</div>' +
+    // TODO: template could go in a separate files
+    template:
+        '<div class="row">' +
+            '<div class="col-md-6">' +
+                '<h1>{{title}}</h1>' +
+            '</div>' +
         '</div>' +
         '<div class="row">' +
-        '<div class="col-md-6">' +
-        '<h2>{{#if search}}Results for {{search}}{{else}}Most recent photos{{/if}}</h2>' +
-        '</div>' +
-        '</div>' +
-        '<div class="row">' +
-        '<div class="col-md-3">' +
-        '<form class="form-inline" role="form">' +
-        '<div class="form-group">' +
-        '<label class="sr-only" for="flickr-search">Email address</label>' +
-        '<input class="form-control" id="flickr-search" placeholder="search"  value="{{search}}">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<button type="button" class="btn btn-default" id="flickr-search-button">Search</button>' +
-        '</div>' +
+            '<div class="col-md-6">' +
+                '<h2>{{#if search}}Results for {{search}}{{else}}Most recent photos{{/if}}</h2>' +
+            '</div>' +
         '</div>' +
         '<div class="row">' +
-        '<div class="col-md-4">' +
-        '<div class="pages"></div>' +
-        '</div>' +
-        '<div class="col-md-4">' +
-        '<p class="pages-of-pages">Page {{page}} of {{pages}}</p>' +
-        '</div>' +
+            '<div class="col-md-4">' +
+                '<div class="form-inline" role="form">' +
+                    '<div class="form-group">' +
+                        '<label class="sr-only" for="flickr-search">Email address</label>' +
+                            '<input class="form-control" id="flickr-search" placeholder="search"  value="{{search}}">' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                        '<button type="button" class="btn btn-default" id="flickr-search-button">Search</button>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="col-md-5">' +
+                '<div class="pages"></div>' +
+            '</div>' +
+            '<div class="col-md-2">' +
+                '<p class="pages-of-pages">Page {{page}} of {{pages}}</p>' +
+            '</div>' +
         '</div>' +
         '<div class="flickr-photos"></div>',
     paginator: function () {
@@ -67,7 +75,7 @@ var PhotoCollectionView = Backbone.View.extend({
         var html = '';
 
         if (currentPage > 1) {
-            html += '<a class="page  btn btn-default" href="#" rel="' + (currentPage - 1) + '"><< Back</a>';
+            html += '<a class="page  btn btn-default" href="#" rel="' + (currentPage - 1) + '"><</a>';
         }
 
         for (var i = 1; i <= totalPages; i++) {
@@ -86,7 +94,7 @@ var PhotoCollectionView = Backbone.View.extend({
             }
         }
         if (currentPage < totalPages) {
-            html += '<a class="page  btn btn-default" href="#" rel="' + (currentPage + 1) + '">Next >></a>';
+            html += '<a class="page  btn btn-default" href="#" rel="' + (currentPage + 1) + '">></a>';
         }
         return html;
     },
