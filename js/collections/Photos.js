@@ -1,18 +1,14 @@
 var FlickrCollection = Backbone.Collection.extend({
     model: PhotoModel,
-    initialize: function(models, options) {
+    initialize: function (models, options) {
         var self = this;
+        // set options api_key, container, loaderImage, perPage, headerTitle, etc
+        _.map(options, function (value, key) {
+            self[key] = value;
+        });
 
-      // create view
-        self.view = new PhotoCollectionView({collection: self});
-
-      // set options api_key, container, loaderImage, perPage, headerTitle, etc
-      _.map(options, function(value, key){
-        self[key] = value;
-      });
-
-      // get photos
-      self.fetch('', 1);
+        // get photos
+        self.fetch(null, 1);
 
     },
     current: 0,
@@ -23,8 +19,8 @@ var FlickrCollection = Backbone.Collection.extend({
     loaderImage: "images/loader.gif",
     headerTitle: 'Photos',
     getRequestData: function (search, page, successCallback, errorCallback) {
-      // This method makes the flickr API request
-      // when the search parameter is null this method will call the getRecent API method other wise the search method is called
+        // This method makes the flickr API request
+        // when the search parameter is null this method will call the getRecent API method other wise the search method is called
         var self = this;
         var data = {
             api_key: self.api_key,
@@ -56,32 +52,32 @@ var FlickrCollection = Backbone.Collection.extend({
     },
     fetch: function (search, page) {
         var self = this;
-        self.view.startLoader();
+        self.trigger('loading');
         function success() {
-            $(self.container).html(self.view.$el);
             self.trigger('photosReady');
         }
+
         self.getRequestData(search, page, success);
     },
     setCurrent: function (index) {
-      var self = this;
+        var self = this;
         if (index > -1 && index < self.size())
-          self.current = self.at(index);
+            self.current = self.at(index);
         else {
             return null;
         }
     },
     prev: function () {
-      // returns the prev model if any
-      // returns null if there's no previous model
+        // returns the prev model if any
+        // returns null if there's no previous model
         var self = this;
         var index = self.current - 1;
         if (index < 0) return null;
         return self.at(index);
     },
     next: function () {
-      // returns the next model if any
-      // returns null if there's no next model
+        // returns the next model if any
+        // returns null if there's no next model
         var self = this;
         var index = self.current + 1;
         if (index > self.size()) return null;

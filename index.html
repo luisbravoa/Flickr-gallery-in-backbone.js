@@ -1,32 +1,36 @@
 <html>
-    <head>
-        <link type="text/css" rel="stylesheet" href="css/style.css">
-        <script src="js/lib/handlebars-v1.3.0.js"></script>
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <script src="js/lib/jquery-2.1.0.js"></script>
-        <script src="js/lib/underscore.js"></script>
-        <script src="js/lib/backbone.js"></script>
-        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<head>
+    <title>Flickr gallery demo</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <script src="js/lib/handlebars-v1.3.0.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="js/lib/jquery-2.1.0.js"></script>
+    <script src="js/lib/underscore.js"></script>
+    <script src="js/lib/backbone.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-        <script src="js/models/Photo.js"></script>
-        <script src="js/collections/Photos.js"></script>
-        <script src="js/views/Photos.js"></script>
-        <script src="js/views/Photo.js"></script>
-        <script src="js/routers/Photos.js"></script>
-        <script>
-            var flickr = new FlickrCollection(null, {api_key: '8e8b0a8d39a7af07485e7b992084a350',container: "#flickr-container", perPage : 75});
-            var flickrRouter = new FlickrRouter();
-            Backbone.history.start();
-        </script>
-    </head>
-    <body>
-        <div id="flickr-container">
+    <script src="js/models/Photo.js"></script>
+    <script src="js/collections/Photos.js"></script>
+    <script src="js/views/Photos.js"></script>
+    <script src="js/views/Photo.js"></script>
+    <script src="js/routers/Photos.js"></script>
+    <script>
+        var flickrCollection = new FlickrCollection(null, {api_key: '8e8b0a8d39a7af07485e7b992084a350', container: "#flickr-container", perPage: 75});
+        // create view
+        flickrView = new PhotoCollectionView({collection: flickrCollection});
+        var flickrRouter = new FlickrRouter();
+        Backbone.history.start();
+    </script>
+</head>
+<body>
+<div id="flickr-container">
+</div>
+<div class="modal fade photoModal" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
         </div>
-        <div class="modal fade photoModal" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                </div>
-            </div>
-        </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

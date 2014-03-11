@@ -2,7 +2,7 @@ var PhotoModelView = Backbone.View.extend({
     model: PhotoModel,
     className: 'flickr-photo',
     template: '<a href="{{url}}"><img class="alpha" src="{{src}}"></a>',
-    render: function(){
+    render: function () {
         var self = this;
         self.model.view = this;
         var template = Handlebars.compile(self.template);
