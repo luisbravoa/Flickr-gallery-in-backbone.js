@@ -1,18 +1,30 @@
 var FlickrCollection = Backbone.Collection.extend({
     model: PhotoModel,
-    initialize: function () {
+    initialize: function(models, options) {
         var self = this;
+
+      // create view
         self.view = new PhotoCollectionView({collection: self});
-        self.fetch('batman', 1);
+
+      // set options api_key, container, loaderImage, perPage, headerTitle, etc
+      _.map(options, function(value, key){
+        self[key] = value;
+      });
+
+      // get photos
+      self.fetch('', 1);
+
     },
     current: 0,
     container: "#flickr-container",
     perPage: 150,
-    api_key: "8e8b0a8d39a7af07485e7b992084a350",
+    api_key: '8e8b0a8d39a7af07485e7b992084a350',
     base_url: "http://api.flickr.com/services/rest/",
     loaderImage: "images/loader.gif",
     headerTitle: 'Photos',
     getRequestData: function (search, page, successCallback, errorCallback) {
+      // This method makes the flickr API request
+      // when the search parameter is null this method will call the getRecent API method other wise the search method is called
         var self = this;
         var data = {
             api_key: self.api_key,
@@ -52,19 +64,24 @@ var FlickrCollection = Backbone.Collection.extend({
         self.getRequestData(search, page, success);
     },
     setCurrent: function (index) {
-        if (index > -1 && index < this.size())
-            this.current = this.at(index);
+      var self = this;
+        if (index > -1 && index < self.size())
+          self.current = self.at(index);
         else {
             return null;
         }
     },
     prev: function () {
+      // returns the prev model if any
+      // returns null if there's no previous model
         var self = this;
         var index = self.current - 1;
         if (index < 0) return null;
         return self.at(index);
     },
     next: function () {
+      // returns the next model if any
+      // returns null if there's no next model
         var self = this;
         var index = self.current + 1;
         if (index > self.size()) return null;

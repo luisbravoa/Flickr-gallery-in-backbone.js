@@ -4,6 +4,7 @@ var PhotoCollectionView = Backbone.View.extend({
     initialize: function(){
         var self = this;
         var collection = self.collection;
+      // show initial loader image
         $(function(){
             $(collection.container).html('<div class="loader"><img src="' + collection.loaderImage + '"></div>');
         });
@@ -28,7 +29,7 @@ var PhotoCollectionView = Backbone.View.extend({
     template:
         '<div class="row">' +
             '<div class="col-md-6">' +
-                '<h1>Photos</h1>' +
+                '<h1>{{title}}</h1>' +
             '</div>' +
         '</div>' +
         '<div class="row">' +
@@ -96,7 +97,8 @@ var PhotoCollectionView = Backbone.View.extend({
             page: collection.page,
             pages: collection.pages,
             total: collection.total,
-            search: collection.search
+            search: collection.search,
+            title : collection.headerTitle
         };
         $('.loader').remove();
         self.$el.html(template(templateData));

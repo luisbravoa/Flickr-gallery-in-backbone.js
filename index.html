@@ -14,7 +14,7 @@
         <script src="js/views/Photo.js"></script>
         <script src="js/routers/Photos.js"></script>
         <script>
-            var flickr = new FlickrCollection();
+            var flickr = new FlickrCollection(null, {api_key: '8e8b0a8d39a7af07485e7b992084a350',container: "#flickr-container", perPage : 75});
             var flickrRouter = new FlickrRouter();
             Backbone.history.start();
         </script>
