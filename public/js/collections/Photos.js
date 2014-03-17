@@ -1,6 +1,8 @@
 var FlickrCollection = Backbone.Collection.extend({
     model: PhotoModel,
     initialize: function (models, options) {
+        /* Takes optinal parameters such as api_key, container, loaderImage,
+         perPage, headerTitle, etc */
         var self = this;
         // set options api_key, container, loaderImage, perPage, headerTitle, etc
         _.map(options, function (value, key) {
@@ -20,7 +22,7 @@ var FlickrCollection = Backbone.Collection.extend({
     headerTitle: 'Photos',
     getRequestData: function (search, page, successCallback, errorCallback) {
         // This method makes the flickr API request
-        // when the search parameter is null this method will call the getRecent API method other wise the search method is called
+        // when the search parameter is null this method will call the getRecent API method otherwise the search method is called
         var self = this;
         var data = {
             api_key: self.api_key,
@@ -51,6 +53,7 @@ var FlickrCollection = Backbone.Collection.extend({
         });
     },
     fetch: function (search, page) {
+        /* Triggers the “loading event and the “photosReady” event when done */
         var self = this;
         self.trigger('loading');
         function success() {
