@@ -14,46 +14,19 @@ module.exports = function(grunt) {
         },
         mocha: {
             test: {
-                src: ['tests/**/*.html'],
-                options: {
-                    logErrors: true
-                }
-            }
-        },
-        mocha: {
-            test2: {
 
                 // Test files
                 src: ['tests/test.html'],
                 options: {
-                    // mocha options
-//                    mocha: {
-//                        ignoreLeaks: false,
-//                        grep: 'food'
-//                    },
-
                     reporter: 'Spec',
-
-                    // Indicates whether 'mocha.run()' should be executed in
-                    // 'bridge.js'
-                    run: true,
-
-                    timeout: 10000
+                    run: true
                 }
             }
         }
     });
-
-    // Load the plugin that provides the "uglify" task.
-//    grunt.loadNpmTasks('grunt-contrib-uglify');
-
-
-
-    //
     grunt.loadNpmTasks('grunt-mocha');
 
 
-    // Default task(s).
     grunt.registerTask('default', ['mocha']);
 
 

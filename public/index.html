@@ -2,8 +2,9 @@
 <head>
     <title>Flickr gallery demo</title>
     <link type="text/css" rel="stylesheet" href="css/style.css">
-    <script src="js/lib/handlebars-v1.3.0.js"></script>
+
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="js/lib/handlebars-v1.3.0.js"></script>
     <script src="js/lib/jquery-2.1.0.js"></script>
     <script src="js/lib/underscore.js"></script>
     <script src="js/lib/backbone.js"></script>
@@ -15,9 +16,11 @@
     <script src="js/views/Photo.js"></script>
     <script src="js/routers/Photos.js"></script>
     <script>
-        var flickrCollection = new FlickrCollection(null, {api_key: '8e8b0a8d39a7af07485e7b992084a350', container: "#flickr-container", perPage: 75});
+        var flickrCollection = new FlickrCollection(null, {api_key: '8e8b0a8d39a7af07485e7b992084a350', container: "#flickr-container"});
         // create view
         flickrView = new PhotoCollectionView({collection: flickrCollection});
+        // get photos
+        flickrCollection.fetch(null, 1);
         var flickrRouter = new FlickrRouter();
         Backbone.history.start();
     </script>

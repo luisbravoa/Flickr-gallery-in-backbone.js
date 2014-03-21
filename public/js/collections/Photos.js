@@ -9,9 +9,6 @@ var FlickrCollection = Backbone.Collection.extend({
             self[key] = value;
         });
 
-        // get photos
-        self.fetch(null, 1);
-
     },
     current: 0,
     container: "#flickr-container",
@@ -45,7 +42,7 @@ var FlickrCollection = Backbone.Collection.extend({
                 self.search = search;
                 self.reset();
                 self.add(res.photos.photo);
-                if (successCallback) successCallback();
+                if (successCallback) successCallback(res);
             },
             error: function (jqXHR, textStatus) {
                 if (errorCallback) errorCallback(jqXHR, textStatus);
@@ -65,16 +62,18 @@ var FlickrCollection = Backbone.Collection.extend({
     setCurrent: function (index) {
         var self = this;
         if (index > -1 && index < self.size())
-            self.current = self.at(index);
+            self.current = index;
         else {
             return null;
         }
+        return self.at(index);
     },
     prev: function () {
         // returns the prev model if any
         // returns null if there's no previous model
         var self = this;
-        var index = self.current - 1;
+        var current = (self.current >= 0)? self.current : 0;;
+        var index = current - 1;
         if (index < 0) return null;
         return self.at(index);
     },
@@ -82,8 +81,9 @@ var FlickrCollection = Backbone.Collection.extend({
         // returns the next model if any
         // returns null if there's no next model
         var self = this;
-        var index = self.current + 1;
-        if (index > self.size()) return null;
+        var current = (self.current >= 0)? self.current : 0;
+        var index = current + 1;
+        if (index > self.size()-1) return null;
         return self.at(index);
     }
 

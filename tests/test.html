@@ -6,24 +6,28 @@
 </head>
 <body>
 <div id="mocha"></div>
+
+
+<script src="../public/js/lib/handlebars-v1.3.0.js"></script>
 <script src="../public/js/lib/jquery-2.1.0.js"></script>
+<script src="../public/js/lib/underscore.js"></script>
+<script src="../public/js/lib/backbone.js"></script>
+<script src="../public/js/lib/bootstrap.min.js"></script>
+
+<script src="../public/js/models/Photo.js"></script>
+<script src="../public/js/collections/Photos.js"></script>
+<script src="../public/js/views/Photos.js"></script>
+<script src="../public/js/views/Photo.js"></script>
+<script src="../public/js/routers/Photos.js"></script>
+
 <script src="../public/js/lib/chai.js"></script>
+<script src="../public/js/lib/sinon-1.9.0.js"></script>
 <script src="../node_modules/grunt-mocha/node_modules/mocha/mocha.js"></script>
 <script>mocha.setup('bdd')</script>
-<script src="test.js"></script>
-<!--<script src="test.object.js"></script>-->
-<!--<script src="test.xhr.js"></script>-->
+<script src="js/collection.js"></script>
 <script>
-//    mocha.checkLeaks();
     mocha.globals(['jQuery']);
     mocha.run();
 </script>
-<!-- run mocha after all test are loaded -->
-<!--<script type="text/javascript" charset="utf-8">-->
-    <!--// Only tests run in real browser, injected script run if options.run == true-->
-    <!--if (navigator.userAgent.indexOf('PhantomJS') < 0) {-->
-        <!--mocha.run();-->
-    <!--}-->
-<!--</script>-->
 </body>
 </html>
