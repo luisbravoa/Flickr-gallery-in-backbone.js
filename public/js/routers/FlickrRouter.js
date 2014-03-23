@@ -1,3 +1,17 @@
+define(
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'handlebars',
+        'collections/FlickrCollection',
+        'models/PhotoModel',
+        'views/PhotoCollectionView',
+        'views/PhotoModelView',
+        'bootstrap'
+    ]
+    , function($, _, Backbone, Handlebars, FlickrCollection, PhotoModel, PhotoCollectionView, PhotoModelView) {
+
 var FlickrRouter = Backbone.Router.extend({
     routes: {
         "main": "main",
@@ -6,6 +20,11 @@ var FlickrRouter = Backbone.Router.extend({
     initialize: function () {
         var self = this;
 
+        self.flickrCollection = new FlickrCollection(null, {api_key: '8e8b0a8d39a7af07485e7b992084a350', container: "#flickr-container"});
+        // create view
+        self.flickrView = new PhotoCollectionView({collection: self.flickrCollection});
+        // get photos
+        self.flickrCollection.fetch(null, 1);
     },
     main: function () {
         var self = this;
@@ -29,7 +48,7 @@ var FlickrRouter = Backbone.Router.extend({
     },
     photoDetail: function (id) {
         var self = this;
-        var current = flickrCollection.get(id);
+        var current = self.flickrCollection.get(id);
 
         // if current model is not defined close modal
         // TODO: think about what to do here, either show an error or load the photo
@@ -39,9 +58,9 @@ var FlickrRouter = Backbone.Router.extend({
         }
         // set window title
         document.title = current.get('title');
-        flickrCollection.current = flickrCollection.indexOf(current);
-        var next = flickrCollection.next();
-        var prev = flickrCollection.prev();
+        self.flickrCollection.current = self.flickrCollection.indexOf(current);
+        var next = self.flickrCollection.next();
+        var prev = self.flickrCollection.prev();
         var templateData = {
             current: current.toJSON(),
             prev: (prev != null) ? prev.toJSON() : null,
@@ -81,11 +100,11 @@ var FlickrRouter = Backbone.Router.extend({
             if (key == 39 && next != null) {
                 console.log('photo/' + next.get('id'));
                 $(document).unbind('keydown');
-                flickrRouter.navigate('photo/' + next.get('id'), {trigger: true});
+                self.navigate('photo/' + next.get('id'), {trigger: true});
             }
             if (key == 37 && prev != null) {
                 $(document).unbind('keydown');
-                flickrRouter.navigate('photo/' + prev.get('id'), {trigger: true});
+                self.navigate('photo/' + prev.get('id'), {trigger: true});
             }
         });
 
@@ -93,3 +112,6 @@ var FlickrRouter = Backbone.Router.extend({
         self.openModal();
     }
 });
+       return FlickrRouter;
+
+    });

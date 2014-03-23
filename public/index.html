@@ -4,25 +4,38 @@
     <link type="text/css" rel="stylesheet" href="css/style.css">
 
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <script src="js/lib/handlebars-v1.3.0.js"></script>
-    <script src="js/lib/jquery-2.1.0.js"></script>
-    <script src="js/lib/underscore.js"></script>
-    <script src="js/lib/backbone.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="application/javascript" data-main="js/main" src="js/lib/require.js"></script>
 
-    <script src="js/models/Photo.js"></script>
-    <script src="js/collections/Photos.js"></script>
-    <script src="js/views/Photos.js"></script>
-    <script src="js/views/Photo.js"></script>
-    <script src="js/routers/Photos.js"></script>
     <script>
-        var flickrCollection = new FlickrCollection(null, {api_key: '8e8b0a8d39a7af07485e7b992084a350', container: "#flickr-container"});
-        // create view
-        flickrView = new PhotoCollectionView({collection: flickrCollection});
-        // get photos
-        flickrCollection.fetch(null, 1);
-        var flickrRouter = new FlickrRouter();
-        Backbone.history.start();
+        require.config({
+            shim: {
+                'underscore': {
+                    deps: ['jquery'],
+                    exports: '_'
+                },
+                backbone: {
+                    deps: ['underscore', 'jquery'],
+                    exports: 'Backbone'
+                },
+                "bootstrap": ["jquery"],
+                handlebars: {
+                    exports: 'Handlebars'
+                }
+            },
+
+            paths: {
+                jquery: 'lib/jquery-2.1.0',
+                underscore: 'lib/underscore',
+                backbone: 'lib/backbone',
+                handlebars: 'lib/handlebars-v1.3.0',
+                bootstrap: 'lib/bootstrap.min',
+                FlickrCollection: './collections/FlickrCollection',
+                PhotoModel: './models/PhotoModel',
+                PhotoCollectionView: './views/PhotoCollectionView',
+                PhotoModelView: './views/PhotoModelView',
+                FlickrRouter: './routers/FlickrRouter'
+            }
+        });
     </script>
 </head>
 <body>

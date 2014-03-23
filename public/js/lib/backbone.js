@@ -9,7 +9,7 @@
 
   // Set up Backbone appropriately for the environment. Start with AMD.
   if (typeof define === 'function' && define.amd) {
-    define(['../../.', 'jquery', 'exports'], function(_, $, exports) {
+    define(['underscore', 'jquery', 'exports'], function(_, $, exports) {
       // Export global even in AMD case in case this script is loaded with
       // others that may still expect a global Backbone.
       root.Backbone = factory(root, exports, _, $);
@@ -1251,11 +1251,10 @@
       var router = this;
       Backbone.history.route(route, function(fragment) {
         var args = router._extractParameters(route, fragment);
-        if (router.execute(callback, args) !== false) {
-          router.trigger.apply(router, ['route:' + name].concat(args));
-          router.trigger('route', name, args);
-          Backbone.history.trigger('route', router, name, args);
-        }
+        router.execute(callback, args);
+        router.trigger.apply(router, ['route:' + name].concat(args));
+        router.trigger('route', name, args);
+        Backbone.history.trigger('route', router, name, args);
       });
       return this;
     },
@@ -1450,7 +1449,6 @@
     // but possibly useful for unit testing Routers.
     stop: function() {
       Backbone.$(window).off('popstate', this.checkUrl).off('hashchange', this.checkUrl);
-      // Some environments will throw when clearing an undefined interval.
       if (this._checkUrlInterval) clearInterval(this._checkUrlInterval);
       History.started = false;
     },

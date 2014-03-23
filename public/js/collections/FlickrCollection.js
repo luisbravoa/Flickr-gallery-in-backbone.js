@@ -1,3 +1,5 @@
+define(['jquery', 'underscore', 'backbone', 'PhotoModel'], function($, _, Backbone, PhotoModel) {
+
 var FlickrCollection = Backbone.Collection.extend({
     model: PhotoModel,
     initialize: function (models, options) {
@@ -87,4 +89,7 @@ var FlickrCollection = Backbone.Collection.extend({
         return self.at(index);
     }
 
+});
+
+    return FlickrCollection;
 });

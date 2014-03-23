@@ -1,4 +1,6 @@
-var PhotoModelView = Backbone.View.extend({
+define(['jquery', 'underscore', 'backbone', 'handlebars', 'models/PhotoModel'], function($, _, Backbone, Handlebars, PhotoModel) {
+
+    var PhotoModelView = Backbone.View.extend({
     model: PhotoModel,
     className: 'flickr-photo',
     template: '<a href="{{url}}"><img class="alpha" src="{{src}}"></a>',
@@ -13,4 +15,8 @@ var PhotoModelView = Backbone.View.extend({
         this.$el.html(template(data));
         return this;
     }
+});
+
+    return PhotoModelView;
+
 });

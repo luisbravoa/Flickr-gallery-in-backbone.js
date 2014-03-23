@@ -1,3 +1,5 @@
+define(['jquery', 'underscore', 'backbone', 'bootstrap'], function($, _, Backbone) {
+
 var PhotoModel = Backbone.Model.extend({
     src: function (sizeSuffix) {
         /*
@@ -15,4 +17,8 @@ var PhotoModel = Backbone.Model.extend({
         var self = this;
         return 'http://www.flickr.com/photos/' + self.get('owner') + '/' + self.get('id');
     }
+});
+
+    return PhotoModel;
+
 });
