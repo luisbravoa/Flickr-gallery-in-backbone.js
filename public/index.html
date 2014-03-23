@@ -2,41 +2,10 @@
 <head>
     <title>Flickr gallery demo</title>
     <link type="text/css" rel="stylesheet" href="css/style.css">
-
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <script type="application/javascript" data-main="js/main" src="js/lib/require.js"></script>
-
-    <script>
-        require.config({
-            shim: {
-                'underscore': {
-                    deps: ['jquery'],
-                    exports: '_'
-                },
-                backbone: {
-                    deps: ['underscore', 'jquery'],
-                    exports: 'Backbone'
-                },
-                "bootstrap": ["jquery"],
-                handlebars: {
-                    exports: 'Handlebars'
-                }
-            },
-
-            paths: {
-                jquery: 'lib/jquery-2.1.0',
-                underscore: 'lib/underscore',
-                backbone: 'lib/backbone',
-                handlebars: 'lib/handlebars-v1.3.0',
-                bootstrap: 'lib/bootstrap.min',
-                FlickrCollection: './collections/FlickrCollection',
-                PhotoModel: './models/PhotoModel',
-                PhotoCollectionView: './views/PhotoCollectionView',
-                PhotoModelView: './views/PhotoModelView',
-                FlickrRouter: './routers/FlickrRouter'
-            }
-        });
-    </script>
+    <!--<script type="application/javascript" data-main="js/config" src="js/lib/require.js"></script>-->
+    <!--<script type="application/javascript" data-main="js/flickr.min" src="js/lib/require.js"></script>-->
+    <script type="application/javascript" src="js/flickr.min.js"></script>
 </head>
 <body>
 <div id="flickr-container">

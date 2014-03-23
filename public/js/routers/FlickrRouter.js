@@ -5,12 +5,11 @@ define(
         'backbone',
         'handlebars',
         'collections/FlickrCollection',
-        'models/PhotoModel',
-        'views/PhotoCollectionView',
         'views/PhotoModelView',
+        'views/PhotoCollectionView',
         'bootstrap'
     ]
-    , function($, _, Backbone, Handlebars, FlickrCollection, PhotoModel, PhotoCollectionView, PhotoModelView) {
+    , function($, _, Backbone, Handlebars, FlickrCollection, PhotoModelView, PhotoCollectionView) {
 
 var FlickrRouter = Backbone.Router.extend({
     routes: {

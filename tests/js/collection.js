@@ -1,7 +1,7 @@
 define(function (require) {
 
-    var FlickrCollection = require('FlickrCollection');
-    var PhotoModel = require('PhotoModel');
+    var FlickrCollection = require('collections/FlickrCollection');
+    var PhotoModel = require('models/PhotoModel');
 
     describe('Collection', function () {
         describe('Get collection instance', function () {
@@ -30,13 +30,13 @@ define(function (require) {
                 {"id": "13310606725", "owner": "57693526@N02", "secret": "6d24d32cd5", "server": "3749", "farm": 4, "title": "Pizza", "ispublic": 1, "isfriend": 0, "isfamily": 0},
                 {"id": "13310989574", "owner": "72360649@N03", "secret": "f8c1fb4208", "server": "3677", "farm": 4, "title": "Che palombaro!", "ispublic": 1, "isfriend": 0, "isfamily": 0}
             ]}, "stat": "ok"};
-            sinon.stub(jQuery, "ajax").yieldsTo("success", fakeResponse);
+
 
             var flickrCollection = new FlickrCollection(null, null);
 
-
             it('should get fake data and set page, pages, total and search values to the collection', function () {
 
+                var stub = sinon.stub(jQuery, "ajax").yieldsTo("success", fakeResponse);
 
                 flickrCollection.getRequestData('', 1, function (data) {
                     chai.expect(flickrCollection.page).to.be.eq(1);
@@ -46,7 +46,9 @@ define(function (require) {
 
                 });
 
-            })
+                stub.restore();
+            });
+
             it('should have a length of 5', function () {
                 chai.expect(flickrCollection.length).to.be.eq(5);
             });
@@ -82,7 +84,11 @@ define(function (require) {
                 chai.expect(flickrCollection.prev().toJSON()).to.be.an('object');
 
             });
+
         });
+
     });
 
+
 });
+

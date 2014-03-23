@@ -1,4 +1,14 @@
-define(['jquery', 'underscore', 'backbone', 'handlebars', 'collections/FlickrCollection', 'views/PhotoModelView'], function($, _, Backbone, Handlebars,  FlickrCollection, PhotoModelView) {
+define(
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'handlebars',
+        'collections/FlickrCollection',
+        'views/PhotoModelView'
+
+    ]
+    , function($, _, Backbone, Handlebars, FlickrCollection, PhotoModelView) {
 
     var PhotoCollectionView = Backbone.View.extend({
     collection: FlickrCollection,

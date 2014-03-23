@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone', 'PhotoModel'], function($, _, Backbone, PhotoModel) {
+define(['jquery', 'underscore', 'backbone', 'models/PhotoModel'], function($, _, Backbone, PhotoModel) {
 
 var FlickrCollection = Backbone.Collection.extend({
     model: PhotoModel,
