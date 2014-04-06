@@ -28,10 +28,10 @@ var FlickrCollection = Backbone.Collection.extend({
             per_page: self.perPage,
             format: 'json',
             nojsoncallback: 1,
-            page: (page != null && page > 0) ? page : 1,
-            method: (search != null && search.length > 0) ? 'flickr.photos.search' : 'flickr.photos.getRecent'
+            page: (page !== null && page > 0) ? page : 1,
+            method: (search !== null && search.length > 0) ? 'flickr.photos.search' : 'flickr.photos.getRecent'
         };
-        if ((search != null && search.length > 0)) {
+        if ((search !== null && search.length > 0)) {
             data.text = search;
         }
         $.ajax({
@@ -74,7 +74,7 @@ var FlickrCollection = Backbone.Collection.extend({
         // returns the prev model if any
         // returns null if there's no previous model
         var self = this;
-        var current = (self.current >= 0)? self.current : 0;;
+        var current = (self.current >= 0)? self.current : 0;
         var index = current - 1;
         if (index < 0) return null;
         return self.at(index);

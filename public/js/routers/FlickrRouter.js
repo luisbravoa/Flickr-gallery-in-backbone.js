@@ -8,8 +8,7 @@ define(
         'views/PhotoModelView',
         'views/PhotoCollectionView',
         'bootstrap'
-    ]
-    , function($, _, Backbone, Handlebars, FlickrCollection, PhotoModelView, PhotoCollectionView) {
+    ], function($, _, Backbone, Handlebars, FlickrCollection, PhotoModelView, PhotoCollectionView) {
 
 var FlickrRouter = Backbone.Router.extend({
     routes: {
@@ -62,8 +61,8 @@ var FlickrRouter = Backbone.Router.extend({
         var prev = self.flickrCollection.prev();
         var templateData = {
             current: current.toJSON(),
-            prev: (prev != null) ? prev.toJSON() : null,
-            next: (next != null) ? next.toJSON() : null
+            prev: (prev !== null) ? prev.toJSON() : null,
+            next: (next !== null) ? next.toJSON() : null
         };
         // TODO: the image size could change depending on user's device (user agent)
         templateData.current.src = current.src('z');
@@ -96,12 +95,12 @@ var FlickrRouter = Backbone.Router.extend({
         // Listen for arrow keys to go forward of backwards
         $(document).bind('keydown', function (e) {
             var key = e.keyCode;
-            if (key == 39 && next != null) {
+            if (key == 39 && next !== null) {
                 console.log('photo/' + next.get('id'));
                 $(document).unbind('keydown');
                 self.navigate('photo/' + next.get('id'), {trigger: true});
             }
-            if (key == 37 && prev != null) {
+            if (key == 37 && prev !== null) {
                 $(document).unbind('keydown');
                 self.navigate('photo/' + prev.get('id'), {trigger: true});
             }

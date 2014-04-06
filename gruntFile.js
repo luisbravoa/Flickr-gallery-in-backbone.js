@@ -22,12 +22,44 @@ module.exports = function(grunt) {
                     timeout: 10000
                 }
             }
+        },
+        jshint: {
+            all: [
+                'public/js/collections/*.js',
+                'public/js/models/*.js',
+                'public/js/routers/*.js',
+                'public/js/views/*.js',
+                'public/js/config.js',
+                'public/js/main.js'
+            ]
+        },
+        watch: {
+            files: ['public/js/**/*.js'],
+            tasks: ['mocha', 'jshint']
+        },
+        requirejs: {
+            compile: {
+                options: {
+                    baseUrl: 'public/js',
+                    mainConfigFile: 'public/js/config.js',
+                    name: 'main',
+                    out: 'public/js/flickr.min.js',
+                    preserveLicenseComments: false,
+                    paths: {
+                        requireLib: 'lib/require'
+                    },
+                    include: 'requireLib'
+                }
+            }
         }
+
     });
     grunt.loadNpmTasks('grunt-mocha');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-
-    grunt.registerTask('default', ['mocha']);
+    grunt.registerTask('default', ['jshint', 'mocha', 'requirejs']);
 
 
 
