@@ -3,9 +3,9 @@ Flickr gallery (Backbone.js)
 
 This a photo gallery that uses the flickr API, it allows you to browse recent photos and also search.
 
-[LIVE DEMO] (http://luisbravoa.com/sandbox/Flickr-gallery-in-backbone.js/public)
+<a href="http://luisbravoa.com/sandbox/Flickr-gallery-in-backbone.js/public" target="_blank">LIVE DEMO</a>
 
-[TEST LIVE] (http://luisbravoa.com/sandbox/Flickr-gallery-in-backbone.js/tests)
+<a href="http://luisbravoa.com/sandbox/Flickr-gallery-in-backbone.js/tests" target="_blank">TEST LIVE</a>
 
 What's new?
 ===========
