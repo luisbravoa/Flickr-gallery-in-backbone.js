@@ -16,7 +16,7 @@ var FlickrCollection = Backbone.Collection.extend({
     container: "#flickr-container",
     perPage: 150,
     api_key: '8e8b0a8d39a7af07485e7b992084a350',
-    base_url: "http://api.flickr.com/services/rest/",
+    base_url: "https://api.flickr.com/services/rest/",
     loaderImage: "images/loader.gif",
     headerTitle: 'Photos',
     getRequestData: function (search, page, successCallback, errorCallback) {
